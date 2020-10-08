@@ -13,5 +13,22 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@material/*": [
+        "src/app/material/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@admin/*": [
+        "src/app/admin/*"
+      ]
+    }
+  }
 }

@@ -1,4 +1,11 @@
-<div *ngIf="product">
+<!--
+(product$ | async) as product
+
+// Recibe el observable y se suscribe y genera el retorno con el async
+y el resultado lo devuelve en la variable product
+// Al usar async pipe autoamticamente se desuscribe cuando se destruye el componente
+-->
+<div *ngIf="(product$ | async) as product">
   <div>
     <img [src]="product.image" alt="">
   </div>
@@ -12,5 +19,7 @@
   <button (click)="createProduct()">crear</button>
   <button (click)="updateProduct()">update</button>
   <button (click)="deleteProduct()">delete</button>
+  <button (click)="fetchRandomUsers()">Get Users Test</button>
+  <button (click)="fetchFile()">Get File Test</button>
 </div>
 

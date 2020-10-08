@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
 
-import { ProductsService } from './../../../core/services/products/products.service';
-import { Product } from './../../../core/models/product.model';
+import {ProductsService} from './../../../core/services/products/products.service';
+import {Product} from './../../../core/models/product.model';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -11,26 +13,26 @@ import { Product } from './../../../core/models/product.model';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: Product;
+  product$: Observable<Product>;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      const id = params.id;
-      this.fetchProduct(id);
-      // this.product = this.productsService.getProduct(id);
-    });
+    this.route.params
+      .subscribe((params: Params) => {
+        const id = params.id;
+        this.fetchProduct(id);
+        // this.product = this.productsService.getProduct(id);
+      });
   }
 
   fetchProduct(id: string) {
-    this.productsService.getProduct(id)
-    .subscribe(product => {
-      this.product = product;
-    });
+    // Retornando la respuesta y asginandole sin el subscribe a la variable
+    this.product$ = this.productsService.getProduct(id);
   }
 
   createProduct() {
@@ -42,9 +44,9 @@ export class ProductDetailComponent implements OnInit {
       description: 'nuevo producto'
     };
     this.productsService.createProduct(newProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
+      .subscribe(product => {
+        console.log(product);
+      });
   }
 
   updateProduct() {
@@ -53,16 +55,32 @@ export class ProductDetailComponent implements OnInit {
       description: 'edicion titulo'
     };
     this.productsService.updateProduct('2', updateProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
+      .subscribe(product => {
+        console.log(product);
+      });
   }
 
   deleteProduct() {
     this.productsService.deleteProduct('222')
-    .subscribe(rta => {
-      console.log(rta);
-    });
+      .subscribe(rta => {
+        console.log(rta);
+      });
+  }
+
+  fetchRandomUsers() {
+    this.productsService.getRandomUsersTest().subscribe(
+      (users) => {
+        console.log('Users', users);
+      }
+    );
+  }
+
+  fetchFile() {
+    this.productsService.getFileTest().subscribe(
+      (contentFile) => {
+        console.log('contentFile', contentFile);
+      }
+    );
   }
 
 }
