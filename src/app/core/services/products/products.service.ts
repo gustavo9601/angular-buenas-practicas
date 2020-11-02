@@ -26,11 +26,11 @@ export class ProductsService {
   ) {
   }
 
-  getAllProducts() {
+  getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.url_api}/products`);
   }
 
-  getProduct(id: string) {
+  getProduct(id: string): Observable<Product> {
     return this.http.get<Product>(`${environment.url_api}/products/${id}`);
   }
 
