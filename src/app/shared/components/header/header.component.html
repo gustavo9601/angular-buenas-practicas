@@ -10,7 +10,17 @@
           <a mat-button routerLink="/contact" routerLinkActive="active"
             >Contact</a
           >
+
+          <a mat-button routerLink="/demo" routerLinkActive="active"
+          >Demo</a
+          >
+
+          <a routerLink="/admin" mat-raised-button matBadgeColor="warn">
+            Dashboard
+          </a>
         </nav>
+
+
         <a routerLink="/order" mat-raised-button [matBadge]="total$ | async" matBadgeColor="warn">
           <mat-icon>shopping_cart</mat-icon>
           Carrito

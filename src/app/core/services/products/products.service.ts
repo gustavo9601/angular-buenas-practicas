@@ -69,7 +69,8 @@ export class ProductsService {
 
 
   getFileTest() {
-    return this.http.get('https://catalogo.mngcolombia.com/wp-content/uploads/real3d-flipbook/WOMAN_MAN_16/page7.jpg?1600786818737', {responseType: 'blob'});
+    const url = 'https://catalogo.mngcolombia.com/wp-content/uploads/real3d-flipbook/WOMAN_MAN_16/page7.jpg?1600786818737';
+    return this.http.get(url, {responseType: 'blob'});
   }
 
 }
