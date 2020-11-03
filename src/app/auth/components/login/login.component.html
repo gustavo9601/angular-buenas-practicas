@@ -23,6 +23,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button [disabled]="form.invalid" mat-raised-button type="submit">Ingresar</button>
+        <button type="button" mat-raised-button [routerLink]="['/auth/register']">Registrarse</button>
       </mat-card-actions>
     </mat-card>
 
