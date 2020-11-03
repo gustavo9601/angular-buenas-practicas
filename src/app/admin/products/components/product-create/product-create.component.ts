@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AngularFireStorage } from '@angular/fire/storage';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AngularFireStorage} from '@angular/fire/storage';
 
-import { finalize } from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 
-import { MyValidators } from './../../../../utils/validators';
-import { ProductsService } from './../../../../core/services/products/products.service';
+import {MyValidators} from './../../../../utils/validators';
+import {ProductsService} from './../../../../core/services/products/products.service';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-product-create',
@@ -26,21 +26,26 @@ export class ProductCreateComponent implements OnInit {
     private router: Router,
     private storage: AngularFireStorage
   ) {
-    this.buildForm();
+
   }
 
   ngOnInit() {
+    this.buildForm();
   }
 
   saveProduct(event: Event) {
     event.preventDefault();
+    // Atachamos el event por default, para evitar cualquier redireccion
+
     if (this.form.valid) {
       const product = this.form.value;
+      product.category_id = (Math.random() * 1000).toString();
+      console.log('product create', product);
       this.productsService.createProduct(product)
-      .subscribe((newProduct) => {
-        console.log(newProduct);
-        this.router.navigate(['./admin/products']);
-      });
+        .subscribe((newProduct) => {
+          console.log(newProduct);
+          this.router.navigate(['/admin/products']);
+        });
     }
   }
 
@@ -51,22 +56,23 @@ export class ProductCreateComponent implements OnInit {
     const task = this.storage.upload(name, file);
 
     task.snapshotChanges()
-    .pipe(
-      finalize(() => {
-        this.image$ = fileRef.getDownloadURL();
-        this.image$.subscribe(url => {
-          console.log(url);
-          this.form.get('image').setValue(url);
-        });
-      })
-    )
-    .subscribe();
+      .pipe(
+        finalize(() => {
+          this.image$ = fileRef.getDownloadURL();
+          this.image$.subscribe(url => {
+            console.log(url);
+            // Seteando el valor a un solo campo del form
+            this.form.get('image').setValue(url);
+          });
+        })
+      )
+      .subscribe();
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
       id: ['', [Validators.required]],
-      title: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: [''],
       description: ['', [Validators.required]],

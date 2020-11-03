@@ -38,6 +38,8 @@ export class ProductEditComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const product = this.form.value;
+      product.category_id = 1;
+
       this.productsService.updateProduct(this.id, product)
       .subscribe((newProduct) => {
         console.log(newProduct);
@@ -48,8 +50,8 @@ export class ProductEditComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      id: ['', [Validators.required]],
-      title: ['', [Validators.required]],
+      _id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: [''],
       description: ['', [Validators.required]],

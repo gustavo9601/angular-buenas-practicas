@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-xs">
             <mat-form-field>
-              <input placeholder="Title" formControlName="title" matInput type="text">
+              <input placeholder="Title" formControlName="name" matInput type="text">
             </mat-form-field>
           </div>
         </div>
@@ -31,9 +31,8 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
+        <button  [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
       </mat-card-actions>
     </mat-card>
-    
+
   </form>
-  

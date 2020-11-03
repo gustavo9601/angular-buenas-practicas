@@ -38,6 +38,7 @@ export class ProductsService {
     return this.http.post(`${environment.url_api}/products`, product);
   }
 
+  // Usando Partial<Interface || clase> permite enviar solo una parte del objeto para no enviar todos los valores sino solo lo que cambio
   updateProduct(id: string, changes: Partial<Product>) {
     return this.http.put(`${environment.url_api}/products/${id}`, changes);
   }

@@ -37,10 +37,11 @@ export class ProductDetailComponent implements OnInit {
 
   createProduct() {
     const newProduct: Product = {
-      _id: '222',
+      _id: (Math.random() * 100).toString(),
       name: 'nuevo desde angular',
-      image: 'assets/images/banner-1.jpg',
+      image: 'https://picsum.photos/200/300',
       price: 3000,
+      category_id: '1',
       description: 'nuevo producto'
     };
     this.productsService.createProduct(newProduct)

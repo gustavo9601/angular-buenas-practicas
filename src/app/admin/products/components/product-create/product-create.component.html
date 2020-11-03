@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-xs">
           <mat-form-field>
-            <input placeholder="Title" formControlName="title" matInput type="text">
+            <input placeholder="Title" formControlName="name" matInput type="text">
           </mat-form-field>
         </div>
       </div>
@@ -24,7 +24,7 @@
             <input placeholder="Price" formControlName="price" matInput type="number">
           </mat-form-field>
           <div *ngIf="priceField.errors && priceField.dirty">
-            <p *ngIf="priceField.hasError('price_invalid')">no te debes pasar de 10000</p>
+            <p *ngIf="priceField.hasError('price_invalid')">precio debe ser mayor a 0 y menor a 10000</p>
             <p *ngIf="priceField.hasError('required')">el campo es requerido</p>
           </div>
         </div>
@@ -47,5 +47,5 @@
       <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
     </mat-card-actions>
   </mat-card>
-  
+
 </form>
