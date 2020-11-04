@@ -28,7 +28,7 @@ export class NavComponent {
   logout() {
     this.auth.logout()
     .then(() => {
-      this.router.navigate(['./home']);
+      this.router.navigate(['./auth/login']);
     });
   }
 

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
-import { CartService } from './../../../core/services/cart.service';
-import { Observable } from 'rxjs';
+import {CartService} from './../../../core/services/cart.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +17,12 @@ export class HeaderComponent implements OnInit {
   constructor(
     private cartService: CartService
   ) {
+
     this.total$ = this.cartService.cart$
-    .pipe(
-      map(products => products.length)
-    );
+      .pipe(
+        // retorna la cantidad de productos quie tenga el servicio
+        map(products => products.length)
+      );
   }
 
   ngOnInit() {

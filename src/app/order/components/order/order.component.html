@@ -1,6 +1,9 @@
 <mat-horizontal-stepper>
   <mat-step>
     <ng-template matStepLabel>Sus productos</ng-template>
+    <!--
+    De esta forma, permite ejecutar una sola suscripcion y crea uan variable temporal de template products
+    -->
     <div *ngIf="(products$ | async) as products">
         <p *ngIf="products.length === 0">no hay productos</p>
         <div class="row" *ngFor="let product of products">
@@ -11,7 +14,7 @@
           </div>
           <div class="col-xs-12 col-sm-5 col-md-5">
             <div class="box">
-              {{ product.title }}
+              {{ product.name }}
             </div>
           </div>
           <div class="col-xs-12 col-sm-5 col-md-5">
@@ -21,7 +24,7 @@
           </div>
         </div>
     </div>
-    
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Datos personales</ng-template>
