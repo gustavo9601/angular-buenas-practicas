@@ -15,7 +15,7 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "~/*",
     "paths": {
       "@core/*": [
         "src/app/core/*"

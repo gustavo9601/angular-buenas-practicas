@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {LayoutContactComponent} from './components/layout-contact/layout-contact.component';
 
-import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ContactComponent
+    component: LayoutContactComponent
   }
 ];
 
@@ -18,4 +18,5 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class ContactRoutingModule {}
+export class ContactRoutingModule {
+}

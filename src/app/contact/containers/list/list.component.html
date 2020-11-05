@@ -1,0 +1,14 @@
+<h1 style="text-align: center">{{title}}</h1>
+<mat-form-field>
+  <input type="text" matInput [(ngModel)]="label" (keyup.enter)="addItem()">
+</mat-form-field>
+
+<mat-list>
+  <mat-list-item *ngFor="let data of employessData;let id=index">
+    <h3 mat-line>{{data.label}}</h3>
+    <mat-chip style="margin-right: 10px">[{{data.num}}] => {{data.num | fibonacci}}</mat-chip>
+    <button mat-raised-button (click)="removeItem(id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>

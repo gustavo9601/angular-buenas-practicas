@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs">
+      <div class="box">
+        <app-list title="List 1" [employessData]="list1"
+                  (removeItemEmployee)="removeItemEmployee(list1, $event)"
+                  (newLabelEmployee)="receiveNewEmployeeData(list1, $event)"></app-list>
+      </div>
+    </div>
+    <div class="col-xs">
+      <div class="box">
+        <app-list title="List 2" [employessData]="list2"
+                  (removeItemEmployee)="removeItemEmployee(list2, $event)"
+                  (newLabelEmployee)="receiveNewEmployeeData(list2, $event)"></app-list>
+      </div>
+    </div>
+  </div>
+</div>

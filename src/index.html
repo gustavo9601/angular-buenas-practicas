@@ -11,5 +11,16 @@
 </head>
 <body>
   <app-root></app-root>
+
+  <!--Añadiendo google Analytics-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F59TQE78SC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Sera dinamico desde el app.component.ts
+    // gtag('config', 'G-F59TQE78SC');
+  </script>
 </body>
 </html>

@@ -1,19 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ContactComponent } from './components/contact/contact.component';
 
-import { ContactRoutingModule } from './contact-routing.module';
-import { SharedModule } from './../shared/shared.module';
+import {ContactRoutingModule} from './contact-routing.module';
+import {SharedModule} from './../shared/shared.module';
+import {ListComponent} from './containers/list/list.component';
+import {LayoutContactComponent} from './components/layout-contact/layout-contact.component';
+import {MaterialModule} from '../material/material.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ContactComponent,
-  ],
+    ListComponent,
+    LayoutContactComponent],
   imports: [
     CommonModule,
     SharedModule,
-    ContactRoutingModule
+    ContactRoutingModule,
+    MaterialModule,
+    FormsModule
   ]
 })
 export class ContactModule {
