@@ -9,6 +9,9 @@ import {AuthGuard} from './auth.guard';
 // Estrategia manual de precarga
 import {PreloadStrategyService} from './core/services/preload-strategy.service';
 
+// Usado la estratia de QuicklinkStrategy
+import {QuicklinkStrategy} from 'ngx-quicklink';
+
 const routes: Routes = [
   {
     path: '',
@@ -63,7 +66,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     // preloadingStrategy: PreloadAllModules  // Precarga todos los modulos
-    preloadingStrategy: PreloadStrategyService   // Le pasamos nuestro servicio que tiene la estrategia manual
+    // preloadingStrategy: PreloadStrategyService   // Le pasamos nuestro servicio que tiene la estrategia manual
+    preloadingStrategy: QuicklinkStrategy  // Usando la estrategia de precarga de la libreria
   })],
   exports: [RouterModule]
 })

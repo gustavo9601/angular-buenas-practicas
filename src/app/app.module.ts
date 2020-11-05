@@ -19,8 +19,11 @@ import {environment} from './../environments/environment';
 
 // Sentry Logs
 import * as Sentry from '@sentry/angular';
-import {Integrations} from '@sentry/tracing';
 import {AuthInterceptor} from './core/interceptor/auth.interceptor';
+
+// Quicklink : estrategia de precarga
+import { QuicklinkModule } from 'ngx-quicklink';
+
 
 Sentry.init({
   dsn: 'https://a88020b80c2746a09f3a15fc95967ce5@o457647.ingest.sentry.io/5453965',
@@ -42,7 +45,8 @@ Sentry.init({
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    QuicklinkModule  // Se debe importar en los modulos que manejen las rutas
   ],
   providers: [
     {

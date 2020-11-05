@@ -26,6 +26,7 @@
     "@sentry/tracing": "^5.25.0",
     "firebase": "^7.19.0",
     "flexboxgrid": "^6.3.1",
+    "ngx-quicklink": "^0.2.6",
     "rxjs": "~6.6.2",
     "swiper": "^4.5.0",
     "tslib": "^2.0.0",
