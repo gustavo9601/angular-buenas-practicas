@@ -6,6 +6,9 @@ import {LayoutComponent} from './layout/layout.component';
 import {AdminGuard} from './admin.guard';
 import {AuthGuard} from './auth.guard';
 
+// Estrategia manual de precarga
+import {PreloadStrategyService} from './core/services/preload-strategy.service';
+
 const routes: Routes = [
   {
     path: '',
@@ -18,7 +21,8 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        data: {preloadManual: true}  //  Flag manual para verificar que rutas precargar y cuales no
       },
       {
         path: 'products',
@@ -30,11 +34,13 @@ const routes: Routes = [
       },
       {
         path: 'order',
-        loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
+        loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
+        data: {preloadManual: true}
       },
       {
         path: 'demo',
-        loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
+        loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule),
+        data: {preloadManual: true}
       },
     ]
   },
@@ -56,7 +62,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
+    // preloadingStrategy: PreloadAllModules  // Precarga todos los modulos
+    preloadingStrategy: PreloadStrategyService   // Le pasamos nuestro servicio que tiene la estrategia manual
   })],
   exports: [RouterModule]
 })
