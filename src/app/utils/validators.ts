@@ -1,6 +1,13 @@
 import {AbstractControl} from '@angular/forms';
+import {CategoriesService} from '../core/services/categories.service';
+import {map} from 'rxjs/operators';
 
 export class MyValidators {
+
+
+  constructor() {
+  }
+
 
   static isPriceValid(control: AbstractControl) {
     const value = control.value;
@@ -35,6 +42,27 @@ export class MyValidators {
     return null;
   }
 
+  // Le escpificamos el tipo de serivcio que recibe
+  static validateCategory(service: CategoriesService) {
+    // Retornamos ahora si la validacion, asincrona en el campo
+    return (control: AbstractControl) => {
+      const value = control.value;
+
+      return service.checkCategory(value)
+        .pipe(
+          map((response: any) => {
+            console.log('response validateCategory', response);
+            const isAvailable = response.isAvailable;
+            if (!isAvailable) {
+              return {
+                not_available: true
+              };
+            }
+            return null;
+          })
+        );  // No se realiza la subscricion, ya que al llamamor desde las validaciones del FormBuilder lo ejecutara
+    };
+  }
 
 }
 
