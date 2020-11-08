@@ -42,7 +42,7 @@ export class LayoutContactComponent implements OnInit {
     );
   }
 
-  removeItemEmployee(typeList: EmployeeData[], $event:number){
+  removeItemEmployee(typeList: EmployeeData[], $event: number) {
     typeList.splice($event, 1);
   }
 

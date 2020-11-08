@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h1>Form control basic</h1>
+    <input type="text" [formControl]="nameField">
+    <p>Value: <small>{{nameField.value}}</small></p>
+    <code>
+    <pre>
+      <p>All Values<p>
+      <p> {{nameField | json}}</p>
+    </pre>
+    </code>
+  </div>
+
+  <div class="col-xs-6">
+    <div>
+      <h1>Lastname</h1>
+      <p>Show console</p>
+      <input type="text" [formControl]="lastNameField">
+      <button (click)="getValueLastNameField()">Get value</button>
+    </div>
+    <hr>
+    <div>
+      <h1>Email</h1>
+      <p>Value: {{emailField.value}}</p>
+      <input type="email" [formControl]="emailField" id="">
+    </div>
+    <hr>
+    <div>
+      <h1>Color</h1>
+      <p>Value: {{colorField.value}}</p>
+      <input type="color" [formControl]="colorField">
+    </div>
+    <hr>
+    <div>
+      <h1>Date</h1>
+      <p>Value: {{dateField.value}}</p>
+      <input type="date" [formControl]="dateField">
+    </div>
+  </div>
+</div>
