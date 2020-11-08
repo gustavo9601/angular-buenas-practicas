@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategoriesService} from '../../../../core/services/categories.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router, Params} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {MyValidators} from '../../../../utils/validators';
@@ -14,15 +14,29 @@ import {MyValidators} from '../../../../utils/validators';
 export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
+  categoryId: string;
 
   constructor(private fb: FormBuilder,
               private _categoriesService: CategoriesService,
               private router: Router,
-              private afs: AngularFireStorage) {
+              private afs: AngularFireStorage,
+              private activatedRoute: ActivatedRoute) {
     this.buildForm();
+    this.categoryId = '';
   }
 
   ngOnInit(): void {
+    // Detectando si recibe parametros
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.categoryId = params.id;
+        // Verifica si existe el parametro enviado
+        if (this.categoryId) {
+          this.getCategory();
+        }
+      }
+    );
+
   }
 
   private buildForm() {
@@ -44,14 +58,21 @@ export class CategoryFormComponent implements OnInit {
   save() {
     console.log('this.form.value', this.form.value);
     if (this.form.valid) {
-      this.createCategory();
+      // Si existe el id
+      if (this.categoryId) {
+        // Se actualiza
+        this.updateCategory();
+      } else {
+        // Se crea
+        this.createCategory();
+      }
     } else {
       // Si no es valido, que marque todo como tocado paramostrar errores al usuario
       this.form.markAllAsTouched();
     }
   }
 
-  createCategory() {
+  private createCategory() {
     const data = this.form.value;
     this._categoriesService.createCategory(data).subscribe(
       (category) => {
@@ -60,6 +81,34 @@ export class CategoryFormComponent implements OnInit {
       }
     );
   }
+
+  private getCategory() {
+    const id = this.categoryId;
+    this._categoriesService.getCategory(id).subscribe(
+      (category) => {
+        // Recibimos la categoria a editar
+        console.log('category to update', category);
+
+        // Patch sobre los campos del formulario
+        this.form.patchValue(category);
+
+        // Individual el patch sobre un campo
+        // this.form.get('name').setValue(value);
+      }
+    );
+  }
+
+  private updateCategory() {
+    const data = this.form.value;
+    const id = this.categoryId;
+    this._categoriesService.updateCategory(id, data).subscribe(
+      (category) => {
+        console.log('category update', category);
+        this.router.navigate(['/admin/categories']);
+      }
+    );
+  }
+
 
   uploadFile($event) {
     const image = $event.target.files[0];
